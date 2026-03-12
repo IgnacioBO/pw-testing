@@ -10,6 +10,7 @@ import { defineConfig, devices } from '@playwright/test';
  //Constantes, primero es el env y el segundo el pais
  const envir = process.env.APP_ENV ?? 'qa'; 
  const country = process.env.COUNTRY ?? 'cl';
+ const headed = process.env.HEADED === 'false' ? false : true;
  //Aqui leera el archivo que se defina al ejecutar (por ejemplo .env.qa.cl o .env.prod.pe) // APP_ENV=qa COUNTRY=cl npx playwright test
  dotenv.config({ path: path.resolve(__dirname, `.env.${envir}.${country}`) });
 
@@ -36,7 +37,7 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     //Para desactivar el headless
-    headless: false,
+    headless: !headed,
     screenshot: 'on',
   },
 
