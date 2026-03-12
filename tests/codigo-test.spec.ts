@@ -25,7 +25,7 @@ test('Rellenar formulario y enviar (Playwright MCP)', async ({ page }) => {
   await page.getByLabel('Which continents have you').selectOption(['Europe', 'North America']);
 
   // Tomar screenshot del formulario lleno
-  await page.screenshot({ path: 'form-filled.png', type: 'png' });
+  await page.screenshot({ path: 'screenshots/form-filled.png', type: 'png' });
 
   // Esperar 1 segundo
   await page.waitForTimeout(1000);
