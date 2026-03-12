@@ -9,8 +9,8 @@ import { Product } from './models/product';
 
 test('comprar un producto', {tag: "@lol"}, async ({page}, testInfo) => {
     
-    const user: string = process.env.USER || ""; 
-    const pass: string = process.env.PASS || "";
+    const user: string = process.env.TEST_USER || ""; 
+    const pass: string = process.env.TEST_PASS || "";
     const url: string = env.urls.frontend;
     const loginPage = new LoginPage(page);
     const homePage = new HomePage(page);

@@ -109,8 +109,8 @@ EXTRAS
 - Insturaccion ejemplo para usar MCP de Playwright:
 "Usa obligatoriamente las herramientas del servidor MCP de Playwright para navegar el sitio real antes de responder.
 Generame un script usando Playwright MCP, tienes que ir a esta pagina. iniciar sesion con user: 180197354 y pas:s Sept.20212021
-Luego esperara a que inicie sesion y vuelva a la pagina principal, buscar un producto por su sku (por ejmeplo "MPM20000231770"), luego seleccionar un color (si lo hay para seleccionar) y/o taalla y luego agregarlo al carrito, finalmente ir al carrito y checkear que el mismo producot que agregue. Luego ir al pago, seleccionar Webpay y proceder al pago. En la pagina del pago selccionar tarjetas, poner este numero de tarjeta 4051885600446623 el CV es 123 y fecha expieracio 09/30, en el pago final poner estas credeciales rut 111111111 y pass 123 y aceptar transaccion, al fina ldebe aparecer una pagina con la orden de comrpa generada, obtenerla e imprimrla por consola
-La pagina es https://pvalenzuelag@ripley.com:pvalenzuelag@ripley.com@nav-simplest.ripley.cl/"
+Luego esperara a que inicie sesion y vuelva a la pagina principal, buscar un producto por su sku (por ejmeplo "MPM20000231770"), luego seleccionar un color (si lo hay para seleccionar) y/o taalla y luego agregarlo al carrito, finalmente ir al carrito y checkear que el mismo producot que agregue. Luego ir al pago, seleccionar Webpay y proceder al pago. En la pagina del pago selccionar tarjetas, poner este numero de tarjeta 82394832948239 el CV es 123 y fecha expieracio 09/30, en el pago final poner estas credeciales rut 111111111 y pass 123 y aceptar transaccion, al fina ldebe aparecer una pagina con la orden de comrpa generada, obtenerla e imprimrla por consola
+La pagina es https://xxxx.cl/"
 
 - Luego otro promppt al finalizar:
 "Quiero que sea TS, en formato Page object Model, ordenadito, donde primero se ponen los locator (por ejemplo private readonly userNameTextBox: Locator;) , loeugo cosntructor (que se inicia el locator, por ejemplo this.userNameTextBox = page.getByRole('textbox', { name: 'Username' });) y luegos los metodos."

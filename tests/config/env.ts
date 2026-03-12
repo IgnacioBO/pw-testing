@@ -7,8 +7,8 @@ export const env = {
   },
 
   credentials: {
-    user: getEnv('USER'),
-    pass: getEnv('PASS'),
+    test_user: getEnv('TEST_USER'),
+    test_pass: getEnv('TEST_PASS'),
   }
 };
 
