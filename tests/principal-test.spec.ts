@@ -7,53 +7,72 @@ import { CheckoutPage } from './pageobjects/checkout-page';
 import { env } from './config/env';
 import { Product } from './models/product';
 
-test('comprar un producto', {tag: "@POM"}, async ({page}, testInfo) => {
-    
-    const user: string = process.env.USER || ""; 
-    const pass: string = process.env.PASS || "";
-    const url: string = env.urls.frontend;
-    const loginPage = new LoginPage(page);
-    const homePage = new HomePage(page);
-    const productPage = new ProductPage(page);
-    const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
-    let productoRandomSel: Product; 
+test.describe('Feature: Productos', () => {
 
-    await loginPage.login(url, user, pass);
-    //Se recomienda dejar la asercion separada del metodo de accion asi que
-    await loginPage.verifyLoginSuccess();
-    //otros literal es hacer la asercion directo en el test, y dejar el metodo de login solo para la accion de login, sin aserciones, y la asercion hacerla aca sin un metodo
-    /*const headerText = await page.locator(".app_logo");
-    await expect(headerText).toContainText('Swag Labs');*/
+    test('Scenario 1: Compra de productos', {tag: "@POM",
+  annotation: {
+    type: 'issue',
+    description: 'https://github.com/microsoft/playwright/issues/23180',
+  },
+},
+         async ({page}, testInfo) => {
+        
+        const user: string = process.env.USER || ""; 
+        const pass: string = process.env.PASS || "";
+        const url: string = env.urls.frontend;
+        const loginPage = new LoginPage(page);
+        const homePage = new HomePage(page);
+        const productPage = new ProductPage(page);
+        const cartPage = new CartPage(page);
+        const checkoutPage = new CheckoutPage(page);
+        let productoRandomSel: Product; 
 
-    productoRandomSel = await homePage.clickOneRandomProduct();
-    console.log(`Producto random elegido: ${JSON.stringify(productoRandomSel)}`);
+        await test.step('Given Estoy logueado', async () => {
+            await loginPage.login(url, user, pass); 
+            //Se recomienda dejar la asercion separada del metodo de accion asi que
+            await loginPage.verifyLoginSuccess();
+            //otros literal es hacer la asercion directo en el test, y dejar el metodo de login solo para la accion de login, sin aserciones, y la asercion hacerla aca sin un metodo
+            /*const headerText = await page.locator(".app_logo");
+            await expect(headerText).toContainText('Swag Labs');*/
+        });
+        
+        //Aqui el test.step permite devolver un valor que sera el producto random elegido.
+        productoRandomSel = await test.step('When Agrego un producto al carrito', async () => {
+            let producto = await homePage.clickOneRandomProduct();
+            console.log(`Producto random elegido: ${JSON.stringify(producto)}`);
 
-    await productPage.verifyProductDetails(productoRandomSel);
-    await productPage.addToCart();
+            await productPage.verifyProductDetails(producto);
+            await productPage.addToCart();
 
-    await cartPage.verifyPageLoaded();
-    await cartPage.verifyIfProductInCart(productoRandomSel);
-    //Guardar ss en carpeta
-    await page.screenshot({path: 'screenshots/product-in-cart.png'});
+            await cartPage.verifyPageLoaded();
+            await cartPage.verifyIfProductInCart(producto);
+            //Guardar ss en carpeta
+            await page.screenshot({path: 'screenshots/product-in-cart.png'});
 
-    //Guardar ss en reporte
-    await testInfo.attach('producto-en-carrito', {
-        body: await page.screenshot({path: 'screenshots/product-in-cart2.png'}),
-        contentType: 'image/png'
+            //Guardar ss en reporte
+            await testInfo.attach('producto-en-carrito', {
+                body: await page.screenshot({path: 'screenshots/product-in-cart2.png'}),
+                contentType: 'image/png'
+            });
+            await cartPage.screenshotCartItems();
+            return producto;
+        });
+
+        await test.step('Then Se completa la compra del productos', async () => {
+            await cartPage.goToCheckout();
+
+            await checkoutPage.fillCheckoutForm('Juan', 'Perez', '12345');
+            await checkoutPage.continueCheckoutPt2();
+            //SS completa sin scroll
+            await page.screenshot({path: 'screenshots/product-in-checkout.png', fullPage: true});
+            await checkoutPage.verifyIfProductInCheckout(productoRandomSel);
+            await checkoutPage.verifySubTotalPrice(productoRandomSel);
+            await checkoutPage.finishCheckout();
+            
+            await page.waitForTimeout(1000);
+        });
+
     });
-    await cartPage.screenshotCartItems();
-    await cartPage.goToCheckout();
-
-    await checkoutPage.fillCheckoutForm('Juan', 'Perez', '12345');
-    await checkoutPage.continueCheckoutPt2();
-    //SS completa sin scroll
-    await page.screenshot({path: 'screenshots/product-in-checkout.png', fullPage: true});
-    await checkoutPage.verifyIfProductInCheckout(productoRandomSel);
-    await checkoutPage.verifySubTotalPrice(productoRandomSel);
-    await checkoutPage.finishCheckout();
-    
-    await page.waitForTimeout(1000);
 
 });
 

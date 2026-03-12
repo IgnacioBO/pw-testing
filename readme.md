@@ -83,6 +83,17 @@ D) Lo otro es agregar las screenshot personalizadas al reporte usando:
     });
 
 
+Usar UI MOD
+1) Permite ejecutar cada test y luego inspeccionar cada paso, los elementos, obtener locators, los tiempos, el dom, logs internos, errores, network, etc
+npx playwright test --ui
+Si no cargan prueba haciando cd a la carpeta de los tests (sepc.ts) y ahi ejecutando
+
+USAR trace on
+1) Con Trace on es posible revisar el test completo paso por paso, revisando cada paso, cada elemento del dom, la pagina como estaba, etc.
+Para activar usar --trace on
+Luego usar npx playwright show-report para poder ir al repote y luego ir a "View Trace"npx playwright test --ui
+
+
 
 
 
