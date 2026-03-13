@@ -43,9 +43,21 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    //Este setup tiene un regex en testMatch para que solo ejecute los archivos que terminan con .setup.ts, 
+    // asi podemos tener un archivo de setup para hacer el login antes de cada test,
+    {
+      name: 'setup',
+      testMatch: /.*\.setup\.ts/,
+    },
+
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'],
+     //   contextOptions: {
+     //     storageState: 'playwright/.auth/user.json' //Aqui se le dice que cargue el estado de autenticacion desde ese archivo, entonces no se tendra que loguear cada vez, sino que se cargara ese estado y se podra ejecutar los tests directamente.
+     //   }
+       },
+       dependencies: ['setup'] //Aqui ponemos setup, dice que antes de ejecutar los tests de este proyecto, ejecute el proyecto setup, que hara la autenticacion, lo hará una sola vez
     }/*,
 
     {

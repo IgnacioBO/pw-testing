@@ -1,4 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
+import { log } from '../config/logger';
 
 export class LoginPage {
 
@@ -34,7 +35,7 @@ export class LoginPage {
     //Meotodos aserciones, algunas las aserciones la hacen directo en la pagia de test.
     async verifyLoginSuccess() {
         await expect(this.headerText).toContainText('Swag Labs');
-        console.log('Login exitoso'); 
+        log.info('Login exitoso'); 
     }
 
     //Meotodos privados atomico

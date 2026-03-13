@@ -10,3 +10,5 @@ screenshots/
 videos/
 user-data/
 .playwright-mcp/
+.auth/
+/logs/
