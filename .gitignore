@@ -12,3 +12,4 @@ user-data/
 .playwright-mcp/
 .auth/
 /logs/
+.env.*.local

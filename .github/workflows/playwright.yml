@@ -13,6 +13,10 @@ jobs:
       matrix:
         shardIndex: [1, 2]
         shardTotal: [2]
+    environment: qa.cl #Por defecto ejecutare el env de qa.cl al hacer push
+    env: #Aqui sacaremos test_user y test_pass de los secrets de github actions
+      TEST_USER: ${{ secrets.TEST_USER }}
+      TEST_PASS: ${{ secrets.TEST_PASS }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4

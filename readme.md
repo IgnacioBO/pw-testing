@@ -1,3 +1,7 @@
+Iniciar un proyecto
+1) npm init playwright@latest
+2=
+
 Como actualizar pw?
 1) Verificar version con npm outdated @playwright/test
 2) npm install -D @playwright/test@latest

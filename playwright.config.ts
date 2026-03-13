@@ -13,7 +13,8 @@ import { defineConfig, devices } from '@playwright/test';
  const headed = process.env.HEADED === 'false' ? false : true;
  //Aqui leera el archivo que se defina al ejecutar (por ejemplo .env.qa.cl o .env.prod.pe) // APP_ENV=qa COUNTRY=cl npx playwright test
  dotenv.config({ path: path.resolve(__dirname, `.env.${envir}.${country}`) });
-
+ //Se cargan .local para variables sensibles 
+ dotenv.config({ path: path.resolve(__dirname, `.env.${envir}.${country}.local`), override: true }); 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
