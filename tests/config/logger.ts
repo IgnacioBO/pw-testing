@@ -3,9 +3,8 @@ import path from 'node:path';
 import fs from 'node:fs';
 
 //Crear carpeta de logs si no existe
-//const logsDir = path.resolve(process.cwd(), 'logs');
-//fs.mkdirSync(logsDir, { recursive: true });
-
+const logsDir = path.resolve(process.cwd(), 'logs');
+fs.mkdirSync(logsDir, { recursive: true });
 
 //GetCaller es una funcion que obtiene el archivo y linea de codigo desde donde se llamo al logger.
 function getCaller(): string {
